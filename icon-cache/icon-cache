@@ -30,7 +30,6 @@
 #
 ###########################################################################
 #
-
 PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
@@ -65,10 +64,18 @@ esac
 
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
-      RESULT=`/usr/bin/find $DIR ! -type d -follow \
-       -newer $DIR/icon-theme.cache -print 2>/dev/null`
+      if [ -a "$DIR/icon-theme.cache" ] ; then
+	RESULT=`/usr/bin/find $DIR ! -type d -follow \
+	-newer $DIR/icon-theme.cache -print 2>/dev/null`
+      else
+	RESULT="nocache"
+      fi
       if [ ! -z $RESULT ]; then
-	  echo "icons newer than the cache found in $DIR. Updating the cache." 
+	  if [ $RESULT == "nocache" ]; then 
+	    echo "no icon cache found for $DIR. generating one."
+	  else
+	    echo "icons newer than the cache found in $DIR. Updating the cache." 
+	  fi
 	  /usr/bin/gtk-update-icon-cache $DIR 
 	  if [ $? -ne 0 ]; then
 	    echo "/usr/bin/gtk-update-icon-cache exited with an error while \

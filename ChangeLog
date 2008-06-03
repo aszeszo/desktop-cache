@@ -1,3 +1,8 @@
 2008-06-03 Erwann Chenede - <erwann.chenede@sun.com>
 
+    * icon-cache/icon-cache: added check for missing icon cache
+    * icon-cache/Makefile.am: mixed up method and manifest
+
+2008-06-03 Erwann Chenede - <erwann.chenede@sun.com>
+
     * initial import of the desktop cache update services
