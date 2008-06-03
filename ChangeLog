@@ -1,3 +1,11 @@
+2008-06-03  Darren Kenny  <darren.kenny@sun.com>
+
+	* Makefile.am:
+	  Add missing contunuation (\) to EXTRA_DIST
+	* icon-cache/Makefile.am:
+	  Make icon-cache be SCRIPTS rather than data, to maintain executable
+	  status.
+
 2008-06-03 Erwann Chenede - <erwann.chenede@sun.com>
 
     * icon-cache/icon-cache: added check for missing icon cache

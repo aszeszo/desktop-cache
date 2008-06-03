@@ -1,4 +1,5 @@
 SUBDIRS = icon-cache 
 EXTRA_DIST = \
-	ChangeLog		
+	ChangeLog \
 	autogen.sh
+
