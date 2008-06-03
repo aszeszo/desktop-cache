@@ -1,0 +1,20 @@
+AC_INIT([desktop-cache-smf-services], [0.1])
+AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([1.9])
+
+AM_INIT_AUTOMAKE(dist-bzip2)
+
+# Internationalization:
+GETTEXT_PACKAGE=desktop-cache-smf-services
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [The domain name to use with gettext.])
+
+AM_GLIB_GNU_GETTEXT()
+#IT_PROG_INTLTOOL([0.35.0])
+
+AM_MAINTAINER_MODE
+
+AC_OUTPUT([
+Makefile
+icon-cache/Makefile
+])
