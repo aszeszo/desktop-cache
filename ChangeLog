@@ -1,3 +1,8 @@
+2008-06-04 Erwann Chenede - <erwann.chenede@sun.com>
+
+    * icon-cache/icon-cache: don't generate cache if the directory doesn't
+      contain subdirectory (hence no icons).
+
 2008-06-03  Darren Kenny  <darren.kenny@sun.com>
 
 	* Makefile.am:

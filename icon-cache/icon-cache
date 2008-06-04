@@ -30,6 +30,7 @@
 #
 ###########################################################################
 #
+
 PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
@@ -58,8 +59,11 @@ case $METHOD in
 esac
 
 #
-# for each icons directory update the icon cache if a index.theme file exist
-# and if icons the directory tree are newer that the icon cache
+# for each icons directory update the icon cache if :
+# a index.theme file exist 
+# and 
+# if icons the directory tree are newer that the icon cache
+# or if no cache exist but subdirectories (hence icons) are present
 #
 
 for DIR in /usr/share/icons/*; do
@@ -68,7 +72,13 @@ for DIR in /usr/share/icons/*; do
 	RESULT=`/usr/bin/find $DIR ! -type d -follow \
 	-newer $DIR/icon-theme.cache -print 2>/dev/null`
       else
-	RESULT="nocache"
+	RESULT=`/usr/bin/find $DIR -type d`
+	if [ ${#RESULT} == ${#DIR} ]; then
+	  echo "$DIR doesn't contains subdirectories. No icon cache is needed"
+	  RESULT=""
+	else
+	  RESULT="nocache"
+	fi
       fi
       if [ ! -z $RESULT ]; then
 	  if [ $RESULT == "nocache" ]; then 
