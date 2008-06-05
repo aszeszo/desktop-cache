@@ -60,32 +60,41 @@ esac
 
 
 #
-# IF the gconf cache exist then :
-#   find schema files newer than the cache 
-# ELSE
-#   get all schema file
+# for each architecture 
+#   if cache file exist 
+#      get the list of modules newer than the cache file
+#   else
+#      make list greater than zero
 #
-# generate/merge schema files in the gconf cache
+#   if list generate cache
 #
 
 IFS=" 
 "
-if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
-  RESULT=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
-    -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml -print 2>/dev/null`
-else
-  RESULT=`/usr/bin/find /etc/gconf/schemas`
+
+ARCH64=`/bin/isainfo -k`
+
+if [[ $ARCH64 != "amd64" ]] && [[ "$ARCH64" != "sparcv9" ]]; then
+  ARCH64=""
 fi
 
-if [ ! -z $RESULT ]; then 
-  echo "updating gconf cache for the following schemas : $RESULT"
-  `export GCONF_CONFIG_SOURCE=xml:merged:/etc/gconf/gconf.xml.defaults
-    /usr/bin/gconftool-2 --makefile-install-rule $RESULT`
-  if [ $? -ne 0 ]; then
-    echo "gconftool-2 exited with an error while generating the cache for\
-$RESULT"
-    exit $SMF_EXIT_MON_DEGRADE
+for DIR in "" $ARCH64; do
+  if [ -a "/etc/$DIR/gtk-2.0/gtk.immodules" ]; then
+    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/immodules/*.so ! -type d -follow \
+      -newer /etc/$DIR/gtk-2.0/gtk.immodules -print 2>/dev/null`
   else
-    echo "schema files merged in the gconf cache"
+    RESULT="no cache file"
   fi
-fi
+
+  if [ ! -z $RESULT ]; then 
+    echo "updating/creating im modules cache file"
+    `/usr/bin/gtk-query-immodules-2.0 /usr/lib/gtk-2.0/*/immodules/*.so \
+	> /etc/$DIR/gtk-2.0/gtk.immodules`
+    if [ $? -ne 0 ]; then
+      echo "gtk-query-immodules-2.0 exited with an error while generating the cache file /etc/$DIR/gtk-2.0/gtk.immodules"
+      exit $SMF_EXIT_MON_DEGRADE
+    else
+      echo "input method cache installed in /etc/$DIR/gtk-2.0/gtk.immodules"
+    fi
+  fi
+done

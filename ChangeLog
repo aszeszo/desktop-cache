@@ -1,5 +1,14 @@
 2008-06-05 Erwann Chenede - <erwann.chenede@sun.com>
 
+	* pixbuf-loaders/* : initial implementation of pixbuf loaders installer
+	* mime-types-cache/* : initial implementation of mime types cache
+	* desktop-mime-cache/* : initial implementation of desktop file cache
+	* input-method/* : initial implementation of the input method cache
+	* Makefile.am
+	* configure.in : added new directories
+
+2008-06-05 Erwann Chenede - <erwann.chenede@sun.com>
+
 	* icon-cache/TODO 
 	* gconf-cache/TODO : added TODO list
 	* gconf-cache/* : initial implementation of gconf cache update

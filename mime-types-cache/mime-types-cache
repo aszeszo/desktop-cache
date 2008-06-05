@@ -30,7 +30,6 @@
 #
 ###########################################################################
 #
-
 PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
@@ -60,32 +59,30 @@ esac
 
 
 #
-# IF the gconf cache exist then :
-#   find schema files newer than the cache 
+# IF the mime cache exist then :
+#   get the list of mime type files newer than the cache file
 # ELSE
-#   get all schema file
+#   make list greater than zero to generate a cache
 #
-# generate/merge schema files in the gconf cache
+# generate the cache
 #
 
 IFS=" 
 "
-if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
-  RESULT=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
-    -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml -print 2>/dev/null`
+if [ -a "/usr/share/mime/mime.cache" ]; then
+  RESULT=`/usr/bin/find /usr/share/mime ! -type d -follow \
+    -newer /usr/share/mime/mime.cache -print 2>/dev/null`
 else
-  RESULT=`/usr/bin/find /etc/gconf/schemas`
+  RESULT="no cache found"
 fi
 
 if [ ! -z $RESULT ]; then 
-  echo "updating gconf cache for the following schemas : $RESULT"
-  `export GCONF_CONFIG_SOURCE=xml:merged:/etc/gconf/gconf.xml.defaults
-    /usr/bin/gconftool-2 --makefile-install-rule $RESULT`
+  echo "updating mime type cache" 
+  `/usr/bin/update-mime-database /usr/share/mime`
   if [ $? -ne 0 ]; then
-    echo "gconftool-2 exited with an error while generating the cache for\
-$RESULT"
+    echo "update-mime-database exited with an error while generating the mime type cache /usr/share/mime/mime.cache"
     exit $SMF_EXIT_MON_DEGRADE
   else
-    echo "schema files merged in the gconf cache"
+    echo "mime type cache /usr/share/mime/mime.cache generated"
   fi
 fi

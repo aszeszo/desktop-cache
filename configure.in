@@ -18,4 +18,8 @@ AC_OUTPUT([
 Makefile
 icon-cache/Makefile
 gconf-cache/Makefile
+pixbuf-loaders/Makefile
+input-method/Makefile
+mime-types-cache/Makefile
+desktop-mime-cache/Makefile
 ])
