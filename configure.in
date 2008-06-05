@@ -17,4 +17,5 @@ AM_MAINTAINER_MODE
 AC_OUTPUT([
 Makefile
 icon-cache/Makefile
+gconf-cache/Makefile
 ])

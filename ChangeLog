@@ -1,3 +1,10 @@
+2008-06-05 Erwann Chenede - <erwann.chenede@sun.com>
+
+	* icon-cache/TODO 
+	* gconf-cache/TODO : added TODO list
+	* gconf-cache/* : initial implementation of gconf cache update
+	* Makefile.am : added new directory
+
 2008-06-05  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* icon-cache/icon-cache: update some messages/typos; set IFS just
