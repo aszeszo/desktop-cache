@@ -59,13 +59,16 @@ case $METHOD in
 esac
 
 #
-# for each icons directory update the icon cache if :
-# a index.theme file exist 
-# and 
-# if icons the directory tree are newer that the icon cache
-# or if no cache exist but subdirectories (hence icons) are present
+# for each icon directory update the icon cache if:
+#  - a index.theme file exist 
+# AND 
+#  - icons in the directory tree are newer than the icon cache
+# OR
+#  - if no cache exist but subdirectories (hence icons) are present
 #
 
+IFS=" 
+"
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
@@ -74,17 +77,17 @@ for DIR in /usr/share/icons/*; do
       else
 	RESULT=`/usr/bin/find $DIR -type d`
 	if [ ${#RESULT} == ${#DIR} ]; then
-	  echo "$DIR doesn't contains subdirectories. No icon cache is needed"
+	  echo "$DIR doesn't contain subdirectories.  No icon cache is needed"
 	  RESULT=""
 	else
 	  RESULT="nocache"
 	fi
       fi
-      if [ ! -z $RESULT ]; then
-	  if [ $RESULT == "nocache" ]; then 
-	    echo "no icon cache found for $DIR. generating one."
+      if [ ! -z "$RESULT" ]; then
+	  if [ "$RESULT" == "nocache" ]; then 
+	    echo "No icon cache found in $DIR.  Generating one."
 	  else
-	    echo "icons newer than the cache found in $DIR. Updating the cache." 
+	    echo "Icons newer than the cache found in $DIR.  Updating the cache." 
 	  fi
 	  /usr/bin/gtk-update-icon-cache $DIR 
 	  if [ $? -ne 0 ]; then
@@ -92,7 +95,7 @@ for DIR in /usr/share/icons/*; do
 generating the icon cache for $DIR." 
 	    exit $SMF_EXIT_MON_DEGRADE
 	  else
-	    echo "icon cache generated for $DIR"
+	    echo "Icon cache successfully generated in $DIR"
 	  fi
       fi
      fi

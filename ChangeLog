@@ -1,5 +1,10 @@
 2008-06-05  Laszlo (Laca) Peter  <laca@sun.com>
 
+	* icon-cache/icon-cache: update some messages/typos; set IFS just
+	  to be sure; quote "$RESULT"
+
+2008-06-05  Laszlo (Laca) Peter  <laca@sun.com>
+
 	* SUNWdesktop-cache.spec: fix %files and delete unnecessary
 	  autotools calls to speed up build
 
