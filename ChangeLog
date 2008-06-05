@@ -1,21 +1,24 @@
+2008-06-05  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* SUNWdesktop-cache.spec: fix %files and delete unnecessary
+	  autotools calls to speed up build
+
 2008-06-04 Erwann Chenede - <erwann.chenede@sun.com>
 
-    * icon-cache/icon-cache: don't generate cache if the directory doesn't
-      contain subdirectory (hence no icons).
+	* icon-cache/icon-cache: don't generate cache if the directory
+	  doesn't contain subdirectory (hence no icons).
 
 2008-06-03  Darren Kenny  <darren.kenny@sun.com>
 
-	* Makefile.am:
-	  Add missing contunuation (\) to EXTRA_DIST
-	* icon-cache/Makefile.am:
-	  Make icon-cache be SCRIPTS rather than data, to maintain executable
-	  status.
+	* Makefile.am:  Add missing continuation (\) to EXTRA_DIST
+	* icon-cache/Makefile.am: Make icon-cache be SCRIPTS rather than
+	  data, to maintain executable status.
 
 2008-06-03 Erwann Chenede - <erwann.chenede@sun.com>
 
-    * icon-cache/icon-cache: added check for missing icon cache
-    * icon-cache/Makefile.am: mixed up method and manifest
+	* icon-cache/icon-cache: added check for missing icon cache
+	* icon-cache/Makefile.am: mixed up method and manifest
 
 2008-06-03 Erwann Chenede - <erwann.chenede@sun.com>
 
-    * initial import of the desktop cache update services
+	* initial import of the desktop cache update services

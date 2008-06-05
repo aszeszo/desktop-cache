@@ -29,10 +29,6 @@ if test "x$CPUS" = "x" -o $CPUS = 0; then
   CPUS=1
 fi
 
-libtoolize --copy --force
-aclocal $ACLOCAL_FLAGS
-automake -a -c -f 
-autoconf
 ./configure --libdir=/lib \
 	    --sysconfdir=/var
 make -j $CPUS
@@ -49,13 +45,15 @@ rm -rf $RPM_BUILD_ROOT
 # defined by another package, so it has to be /var/svc even if this
 # package's %_localstatedir is redefined
 %defattr (-, root, sys)
-%dir %attr (0755, root, sys) /var
-/var/svc/*
+%attr (-, root, sys) %class (manifest) /var/svc/manifest
 %defattr (-, root, bin)
-%dir %attr (0755, root, lib) /lib
-/lib/svc/*
+%dir %attr (0755, root, bin) /lib
+/lib/svc
+%defattr (-, root, sys)
 
 %changelog
+* Thu Jun 5 2008 - laca@sun.com
+- fix %files and delete unnecessary autotools to speed up build
 * Tue Jun 3 2008 - erwann.chenede@sun.com
 - Initial spec
 
