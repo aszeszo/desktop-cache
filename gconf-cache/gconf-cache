@@ -68,7 +68,7 @@ esac
 # generate/merge schema files in the gconf cache
 #
 
-rval=$SMF_EXIT_NON_DEGRADE
+rval=$SMF_EXIT_OK
 
 IFS=" 
 "
@@ -93,7 +93,7 @@ if [ -n "$RESULT" ]; then
     /usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS > /dev/null
   if [ $? -ne 0 ]; then
     echo "gconftool-2 exited with an error while installing schemas"
-    exit $SMF_EXIT_ERROR_FATAL
+    exit $SMF_EXIT_NON_DEGRADE
   else
     echo "Schema files merged in the GConf cache"
   fi
@@ -109,7 +109,7 @@ if [ -n "$ENTRIES" ]; then
       --load $ENTRIES > /dev/null
   if [ $? -ne 0 ]; then
     echo "gconftool-2 exited with an error while adding entries"
-    exit $SMF_EXIT_ERROR_FATAL
+    exit $SMF_EXIT_NON_DEGRADE
   else
     echo "Entries merged into the GConf cache"
   fi

@@ -1,6 +1,16 @@
 2008-06-06  Darren Kenny  <darren.kenny@sun.com>
 
 	* desktop-mime-cache/desktop-mime-cache:
+	* gconf-cache/gconf-cache:
+	* icon-cache/icon-cache:
+	* input-method/input-method-cache:
+	* mime-types-cache/mime-types-cache:
+	  After re-reading the smf_method manpage, I was mistaken about the exit
+	  codes - should be OK for success, and NON_DEGRADE for error here. 
+
+2008-06-06  Darren Kenny  <darren.kenny@sun.com>
+
+	* desktop-mime-cache/desktop-mime-cache:
 	* icon-cache/icon-cache:
 	* input-method/input-method-cache:
 	* mime-types-cache/mime-types-cache:

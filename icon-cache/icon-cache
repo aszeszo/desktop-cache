@@ -94,7 +94,7 @@ for DIR in /usr/share/icons/*; do
 	  if [ $? -ne 0 ]; then
 	    echo "/usr/bin/gtk-update-icon-cache exited with an error while \
 generating the icon cache for $DIR." 
-	    exit $SMF_EXIT_ERR_FATAL
+	    exit $SMF_EXIT_MON_DEGRADE
 	  else
 	    echo "Icon cache successfully generated in $DIR"
 	  fi
@@ -102,4 +102,4 @@ generating the icon cache for $DIR."
      fi
 done
 
-exit $SMF_EXIT_MON_DEGRADE
+exit $SMF_EXIT_OK
