@@ -1,5 +1,10 @@
 2008-06-06  Darren Kenny  <darren.kenny@sun.com>
 
+	* gconf-cache/gconf-cache:
+	  Fix a bad merge by me... 
+
+2008-06-06  Darren Kenny  <darren.kenny@sun.com>
+
 	* pixbuf-loaders/pixbuf-loaders-installer:
 	  Missed one script when updating exit codes.
 

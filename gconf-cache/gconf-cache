@@ -84,7 +84,7 @@ else
   ENTRIES=`/usr/bin/find /etc/gconf/schemas -name '*.entries' ! -type d`
 fi
 
-if [ -n "$RESULT" ]; then 
+if [ -n "$SCHEMAS" ]; then 
   echo "Updating GConf cache for the following schemas:"
   echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
