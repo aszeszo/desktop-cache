@@ -1,3 +1,8 @@
+2008-06-06  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* gconf-cache/gconf-cache: import schemas and entries separately
+	  as the command is different and other minor changes.
+
 2008-06-05 Erwann Chenede - <erwann.chenede@sun.com>
 
 	* pixbuf-loaders/* : initial implementation of pixbuf loaders installer

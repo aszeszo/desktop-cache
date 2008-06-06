@@ -71,21 +71,45 @@ esac
 IFS=" 
 "
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
-  RESULT=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
+  SCHEMAS=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
+    -name '*.schemas' \
+    -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml -print 2>/dev/null`
+  ENTRIES=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
+    -name '*.entries' \
     -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml -print 2>/dev/null`
 else
-  RESULT=`/usr/bin/find /etc/gconf/schemas`
+  SCHEMAS=`/usr/bin/find /etc/gconf/schemas -name '*.schemas' ! -type d`
+  ENTRIES=`/usr/bin/find /etc/gconf/schemas -name '*.entries' ! -type d`
 fi
 
-if [ ! -z $RESULT ]; then 
-  echo "updating gconf cache for the following schemas : $RESULT"
-  `export GCONF_CONFIG_SOURCE=xml:merged:/etc/gconf/gconf.xml.defaults
-    /usr/bin/gconftool-2 --makefile-install-rule $RESULT`
+if [ ! -z "$SCHEMAS" ]; then 
+  echo "Updating GConf cache for the following schemas:"
+  echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
+  # redirect stdout to /dev/null because gconftool is too verbose
+  # errors are printed to stderr
+  GCONF_CONFIG_SOURCE=xml:merged:/etc/gconf/gconf.xml.defaults \
+    /usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS > /dev/null
   if [ $? -ne 0 ]; then
-    echo "gconftool-2 exited with an error while generating the cache for\
-$RESULT"
+    echo "gconftool-2 exited with an error while installing schemas"
     exit $SMF_EXIT_MON_DEGRADE
   else
-    echo "schema files merged in the gconf cache"
+    echo "Schema files merged in the GConf cache"
   fi
 fi
+
+if [ ! -z "$ENTRIES" ]; then 
+  echo "Updating GConf cache for the following entries:"
+  echo "$ENTRIES" | /bin/sed -e 's/^/    /'
+  # redirect stdout to /dev/null because gconftool is too verbose
+  # errors are printed to stderr
+  /usr/bin/gconftool-2 --direct \
+      --config-source=xml:merged:/etc/gconf/gconf.xml.defaults \
+      --load $ENTRIES > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "gconftool-2 exited with an error while adding entries"
+    exit $SMF_EXIT_MON_DEGRADE
+  else
+    echo "Entries merged into the GConf cache"
+  fi
+fi
+
