@@ -44,7 +44,7 @@ fi
 
 METHOD=$1
 
-case $METHOD in
+case "$METHOD" in
     start)
 	# Continue with rest of script
 	;;
@@ -86,14 +86,14 @@ for DIR in "" $ARCH64; do
     RESULT="no loader file"
   fi
 
-  if [ ! -z $RESULT ]; then 
+  if [ -n "$RESULT" ]; then 
     echo "updating/creating gdk pixbuf loader file"
     `/usr/bin/gdk-pixbuf-query-loaders > /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders`
     if [ $? -ne 0 ]; then
       echo "gdk-pixbuf-query-loaders exited with an error while generating the installer file /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
-      exit $SMF_EXIT_MON_DEGRADE
     else
       echo "gdk pixbuf loaders installed in /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
+      exit $SMF_EXIT_MON_DEGRADE
     fi
   fi
 done

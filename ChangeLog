@@ -1,3 +1,15 @@
+2008-06-06  Darren Kenny  <darren.kenny@sun.com>
+
+	* desktop-mime-cache/desktop-mime-cache:
+	* gconf-cache/gconf-cache:
+	* icon-cache/icon-cache:
+	* input-method/input-method-cache:
+	* mime-types-cache/mime-types-cache:
+	* pixbuf-loaders/pixbuf-loaders-installer:
+	  Quote "$RESULT" and use -n instead of !-z.
+	  Also moved the exit codes, were exiting non-degrade on a failure,
+	  should be exiting that on success - still missing some exits though.
+
 2008-06-06  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* gconf-cache/gconf-cache: import schemas and entries separately

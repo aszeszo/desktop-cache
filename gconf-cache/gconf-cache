@@ -68,6 +68,8 @@ esac
 # generate/merge schema files in the gconf cache
 #
 
+rval=$SMF_EXIT_NON_DEGRADE
+
 IFS=" 
 "
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
@@ -82,7 +84,7 @@ else
   ENTRIES=`/usr/bin/find /etc/gconf/schemas -name '*.entries' ! -type d`
 fi
 
-if [ ! -z "$SCHEMAS" ]; then 
+if [ -n "$RESULT" ]; then 
   echo "Updating GConf cache for the following schemas:"
   echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
@@ -91,13 +93,13 @@ if [ ! -z "$SCHEMAS" ]; then
     /usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS > /dev/null
   if [ $? -ne 0 ]; then
     echo "gconftool-2 exited with an error while installing schemas"
-    exit $SMF_EXIT_MON_DEGRADE
+    exit $SMF_EXIT_ERROR_FATAL
   else
     echo "Schema files merged in the GConf cache"
   fi
 fi
 
-if [ ! -z "$ENTRIES" ]; then 
+if [ -n "$ENTRIES" ]; then 
   echo "Updating GConf cache for the following entries:"
   echo "$ENTRIES" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
@@ -107,9 +109,10 @@ if [ ! -z "$ENTRIES" ]; then
       --load $ENTRIES > /dev/null
   if [ $? -ne 0 ]; then
     echo "gconftool-2 exited with an error while adding entries"
-    exit $SMF_EXIT_MON_DEGRADE
+    exit $SMF_EXIT_ERROR_FATAL
   else
     echo "Entries merged into the GConf cache"
   fi
 fi
 
+exit $rval

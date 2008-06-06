@@ -41,9 +41,9 @@ if [ $# -ne 1 ] ; then
     exit 2
 fi
 
-METHOD=$1
+METHOD="$1"
 
-case $METHOD in
+case "$METHOD" in
     start)
 	# Continue with rest of script
 	;;
@@ -76,7 +76,7 @@ else
   RESULT="no cache found"
 fi
 
-if [ ! -z $RESULT ]; then 
+if [ -n "$RESULT" ]; then 
   echo "updating desktop file cache" 
   `/usr/bin/update-desktop-database`
   if [ $? -ne 0 ]; then

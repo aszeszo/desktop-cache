@@ -44,7 +44,7 @@ fi
 
 METHOD=$1
 
-case $METHOD in
+case "$METHOD" in
     start)
 	# Continue with rest of script
 	;;
@@ -86,15 +86,15 @@ for DIR in "" $ARCH64; do
     RESULT="no cache file"
   fi
 
-  if [ ! -z $RESULT ]; then 
+  if [ -n "$RESULT" ]; then 
     echo "updating/creating im modules cache file"
     `/usr/bin/gtk-query-immodules-2.0 /usr/lib/gtk-2.0/*/immodules/*.so \
 	> /etc/$DIR/gtk-2.0/gtk.immodules`
     if [ $? -ne 0 ]; then
       echo "gtk-query-immodules-2.0 exited with an error while generating the cache file /etc/$DIR/gtk-2.0/gtk.immodules"
-      exit $SMF_EXIT_MON_DEGRADE
     else
       echo "input method cache installed in /etc/$DIR/gtk-2.0/gtk.immodules"
+      exit $SMF_EXIT_MON_DEGRADE
     fi
   fi
 done

@@ -43,7 +43,7 @@ fi
 
 METHOD=$1
 
-case $METHOD in
+case "$METHOD" in
     start)
 	# Continue with rest of script
 	;;
@@ -76,13 +76,13 @@ else
   RESULT="no cache found"
 fi
 
-if [ ! -z $RESULT ]; then 
+if [ -n "$RESULT" ]; then 
   echo "updating mime type cache" 
   `/usr/bin/update-mime-database /usr/share/mime`
   if [ $? -ne 0 ]; then
     echo "update-mime-database exited with an error while generating the mime type cache /usr/share/mime/mime.cache"
-    exit $SMF_EXIT_MON_DEGRADE
   else
     echo "mime type cache /usr/share/mime/mime.cache generated"
+    exit $SMF_EXIT_MON_DEGRADE
   fi
 fi
