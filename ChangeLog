@@ -1,6 +1,16 @@
 2008-06-06  Darren Kenny  <darren.kenny@sun.com>
 
 	* desktop-mime-cache/desktop-mime-cache:
+	* icon-cache/icon-cache:
+	* input-method/input-method-cache:
+	* mime-types-cache/mime-types-cache:
+	* pixbuf-loaders/pixbuf-loaders-installer:
+	  Change exit codes to exit with ERR_FATAL on error, otherwise always
+	  NON_DEGRADE - since all went well.
+
+2008-06-06  Darren Kenny  <darren.kenny@sun.com>
+
+	* desktop-mime-cache/desktop-mime-cache:
 	* gconf-cache/gconf-cache:
 	* icon-cache/icon-cache:
 	* input-method/input-method-cache:

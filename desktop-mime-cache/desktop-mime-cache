@@ -81,8 +81,10 @@ if [ -n "$RESULT" ]; then
   `/usr/bin/update-desktop-database`
   if [ $? -ne 0 ]; then
     echo "update-mime-database exited with an error while generating the desktop file cache /usr/share/applications/mimeinfo.cache"
-    exit $SMF_EXIT_MON_DEGRADE
+    exit $SMF_EXIT_ERR_FATAL
   else
     echo "desktop file cache /usr/share/applications/mimeinfo.cache generated"
   fi
 fi
+
+exit $SMF_EXIT_MON_DEGRADE
