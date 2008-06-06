@@ -91,10 +91,10 @@ for DIR in "" $ARCH64; do
     `/usr/bin/gdk-pixbuf-query-loaders > /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders`
     if [ $? -ne 0 ]; then
       echo "gdk-pixbuf-query-loaders exited with an error while generating the installer file /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
-      exit $SMF_EXIT_ERR_FATAL
+      exit $SMF_EXIT_MON_DEGRADE
     else
       echo "gdk pixbuf loaders installed in /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
     fi
   fi
 done
-exit $SMF_EXIT_MON_DEGRADE
+exit $SMF_EXIT_OK

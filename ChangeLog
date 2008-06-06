@@ -1,5 +1,10 @@
 2008-06-06  Darren Kenny  <darren.kenny@sun.com>
 
+	* pixbuf-loaders/pixbuf-loaders-installer:
+	  Missed one script when updating exit codes.
+
+2008-06-06  Darren Kenny  <darren.kenny@sun.com>
+
 	* desktop-mime-cache/desktop-mime-cache:
 	* gconf-cache/gconf-cache:
 	* icon-cache/icon-cache:
