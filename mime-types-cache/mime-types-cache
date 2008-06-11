@@ -70,7 +70,7 @@ esac
 IFS=" 
 "
 if [ -a "/usr/share/mime/mime.cache" ]; then
-  RESULT=`/usr/bin/find /usr/share/mime ! -type d -follow \
+  RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow \
     -newer /usr/share/mime/mime.cache -print 2>/dev/null`
 else
   RESULT="no cache found"
@@ -78,10 +78,10 @@ fi
 
 if [ -n "$RESULT" ]; then 
   echo "updating mime type cache" 
-  `/usr/bin/update-mime-database /usr/share/mime`
+  /usr/bin/update-mime-database /usr/share/mime
   if [ $? -ne 0 ]; then
     echo "update-mime-database exited with an error while generating the mime type cache /usr/share/mime/mime.cache"
-    exit $SMF_EXIT_NON_DEGRADE
+    exit $SMF_EXIT_MON_DEGRADE
   else
     echo "mime type cache /usr/share/mime/mime.cache generated"
   fi

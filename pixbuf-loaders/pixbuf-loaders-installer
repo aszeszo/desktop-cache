@@ -80,7 +80,7 @@ fi
 
 for DIR in "" $ARCH64; do
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
-    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/2.10.0/loaders ! -type d -follow \
+    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d -follow \
       -newer /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders -print 2>/dev/null`
   else
     RESULT="no loader file"
@@ -88,7 +88,7 @@ for DIR in "" $ARCH64; do
 
   if [ -n "$RESULT" ]; then 
     echo "updating/creating gdk pixbuf loader file"
-    `/usr/bin/gdk-pixbuf-query-loaders > /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders`
+    /usr/bin/$DIR/gdk-pixbuf-query-loaders > /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders
     if [ $? -ne 0 ]; then
       echo "gdk-pixbuf-query-loaders exited with an error while generating the installer file /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
       exit $SMF_EXIT_MON_DEGRADE

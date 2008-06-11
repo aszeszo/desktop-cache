@@ -1,3 +1,17 @@
+2008-06-11  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* desktop-mime-cache/desktop-mime-cache: delete bogus ``s
+	* gconf-cache/gconf-cache: s/NON_DEGRADE/MON_DEGRADE/
+	* input-method/input-method-cache: delete bogus ``s;
+	  s/NON_DEGRADE/MON_DEGRADE/; use the 64-bit gtk-query-immodules-2.0
+	  against the 64-bit immodules when generating the 64-bit config file
+	* mime-types-cache/mime-types-cache: look for new config files
+	  under /usr/share/mime/packages only; delete bogus ``s;
+	  s/NON_DEGRADE/MON_DEGRADE/
+	* pixbuf-loaders/pixbuf-loaders-installer: s/2.10.0/*/ so it's a bit
+	  more future-proof; delete bogus ``s; use the 64-bit
+	  gdk-pixbuf-query-loaders when generating the 64-bit config file
+
 2008-06-08 Erwann Chenede - <erwann.chenede@sun.com>
 
 	* COPYING: CDDL
