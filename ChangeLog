@@ -1,3 +1,9 @@
+2008-06-11 Erwann Chenede - <erwann.chenede@sun.com>
+
+	* SUNWdesktop-cache.copyright
+	* SUNWdesktop-cache.spec : removed as the package 
+	  is integrated in the spec-files repo now
+
 2008-06-11  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* desktop-mime-cache/desktop-mime-cache: delete bogus ``s
