@@ -71,7 +71,7 @@ IFS="
 "
 if [ -a "/usr/share/mime/mime.cache" ]; then
   RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow \
-    -newer /usr/share/mime/mime.cache -print 2>/dev/null`
+    -newer /usr/share/mime/mime.cache 2>/dev/null`
 else
   RESULT="no cache found"
 fi

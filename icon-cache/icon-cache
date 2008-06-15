@@ -73,7 +73,7 @@ for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
 	RESULT=`/usr/bin/find $DIR ! -type d -follow \
-	-newer $DIR/icon-theme.cache -print 2>/dev/null`
+	-newer $DIR/icon-theme.cache 2>/dev/null`
       else
 	RESULT=`/usr/bin/find $DIR -type d`
 	echo "$(RESULT)"

@@ -1,4 +1,9 @@
 2008-06-15 Erwann Chenede - <erwann.chenede@sun.com>
+
+	* */all scripts : removed unneeded -print argument 
+	(suggested by Peter Tribble)
+
+2008-06-15 Erwann Chenede - <erwann.chenede@sun.com>
 	
 	* */*.xml : changes dependency from usr to fs-local
 	and added comments. Changed the classification from 

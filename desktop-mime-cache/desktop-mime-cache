@@ -73,7 +73,7 @@ IFS="
 "
 if [ -a $MIMEFILE ]; then
   RESULT=`/usr/bin/find /usr/share/applications ! -type d -follow \
-    -newer $MIMEFILE -print 2>/dev/null`
+    -newer $MIMEFILE 2>/dev/null`
 else
   RESULT="no cache found"
 fi
