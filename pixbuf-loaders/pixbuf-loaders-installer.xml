@@ -44,14 +44,16 @@
 
 	<single_instance />
 
+	<!-- Need / & /usr filesystems mounted, /var mounted read/write -->
 	<dependency
-		name='usr'
+		name='fs-local'
 		type='service'
 		grouping='require_all'
 		restart_on='none'>
 		<service_fmri value='svc:/system/filesystem/local' />
 	</dependency>
 
+	<!-- Need to be run before gdm is started -->
 	<dependent
          name='pixbuf-loaders-installer_gdm'
          grouping='optional_all'
@@ -80,7 +82,7 @@
 			value='transient' />
 	</property_group>
 
-	<stability value='Evolving' />
+	<stability value='Uncommitted' />
 
 	<template>
 		<common_name>

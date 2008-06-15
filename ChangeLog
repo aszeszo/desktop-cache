@@ -1,4 +1,12 @@
 2008-06-15 Erwann Chenede - <erwann.chenede@sun.com>
+	
+	* */*.xml : changes dependency from usr to fs-local
+	and added comments. Changed the classification from 
+	evolving to Uncommitted (changes suggested by Dave Miner)
+	* */all scripts : removed all SMF_EXIT_MON_DEGRADE
+	to SMF_EXIT_ERR_FATAL 
+
+2008-06-15 Erwann Chenede - <erwann.chenede@sun.com>
 
 	* desktop-mime-cache/desktop-mime-cache
 	* desktop-mime-cache/desktop-mime-cache.xml
