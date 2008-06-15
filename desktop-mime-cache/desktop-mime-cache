@@ -67,11 +67,13 @@ esac
 # generate the cache
 #
 
+MIMEFILE="/usr/share/applications/mimeinfo.cache"
+
 IFS=" 
 "
-if [ -a "/usr/share/applications/mimeinfo.cache" ]; then
+if [ -a $MIMEFILE ]; then
   RESULT=`/usr/bin/find /usr/share/applications ! -type d -follow \
-    -newer /usr/share/applications/mimeinfo.cache -print 2>/dev/null`
+    -newer $MIMEFILE -print 2>/dev/null`
 else
   RESULT="no cache found"
 fi
@@ -80,10 +82,10 @@ if [ -n "$RESULT" ]; then
   echo "updating desktop file cache" 
   /usr/bin/update-desktop-database
   if [ $? -ne 0 ]; then
-    echo "update-mime-database exited with an error while generating the desktop file cache /usr/share/applications/mimeinfo.cache"
-    exit $SMF_EXIT_MON_DEGRADE
+    echo "update-mime-database exited with an error while generating the desktop file cache $MIMEFILE"
+    exit $SMF_EXIT_ERR_FATAL
   else
-    echo "desktop file cache /usr/share/applications/mimeinfo.cache generated"
+    echo "desktop file cache $MIMEFILE generated"
   fi
 fi
 

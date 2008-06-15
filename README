@@ -1,2 +1,5 @@
 use the following guideline for ksh services 
 http://opensolaris.org/os/community/on/shellstyle/
+
+If you make a modification that is common to all 
+services. Do propagate it to all services.

@@ -29,7 +29,8 @@
     or other dealings in this Software without prior written authorization
     of the copyright holder.
 
-    Service manifest for ensuring GNOME desktop faile cache is up to date.
+    Service manifest for ensuring GNOME desktop file cache is up to date.
+    see update-desktop-database manpage for details.
 -->
 
 <service_bundle type='manifest' name='SUNWdesktop-cache:desktop-mime-cache'>

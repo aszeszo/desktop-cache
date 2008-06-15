@@ -68,8 +68,6 @@ esac
 # generate/merge schema files in the gconf cache
 #
 
-rval=$SMF_EXIT_OK
-
 IFS=" 
 "
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
@@ -109,10 +107,8 @@ if [ -n "$ENTRIES" ]; then
       --load $ENTRIES > /dev/null
   if [ $? -ne 0 ]; then
     echo "gconftool-2 exited with an error while adding entries"
-    exit $SMF_EXIT_MON_DEGRADE
+    exit $SMF_EXIT_ERR_FATAL
   else
     echo "Entries merged into the GConf cache"
   fi
 fi
-
-exit $rval
