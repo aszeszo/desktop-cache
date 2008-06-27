@@ -1,3 +1,7 @@
+2008-06-27  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* configure.in: bump to 0.1.1
+
 2008-06-27 Erwann Chenede - <erwann.chenede@sun.com>
 
 	* icon-cache/icon-cache : removed debug statement
