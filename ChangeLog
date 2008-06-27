@@ -1,3 +1,7 @@
+2008-06-27 Erwann Chenede - <erwann.chenede@sun.com>
+
+	* icon-cache/icon-cache : removed debug statement
+
 2008-06-15 Erwann Chenede - <erwann.chenede@sun.com>
 
 	* */all scripts : removed unneeded -print argument 

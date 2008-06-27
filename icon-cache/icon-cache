@@ -76,7 +76,6 @@ for DIR in /usr/share/icons/*; do
 	-newer $DIR/icon-theme.cache 2>/dev/null`
       else
 	RESULT=`/usr/bin/find $DIR -type d`
-	echo "$(RESULT)"
 	if [ ${#RESULT} == ${#DIR} ]; then
 	  echo "$DIR doesn't contain subdirectories.  No icon cache is needed"
 	  RESULT=""
