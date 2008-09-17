@@ -1,3 +1,9 @@
+2008-09-17  Ghee Teo <ghee.teo@sun.com>
+
+	Create new tarball with CDDL COPYING file.	
+	* configure.in: bump to 0.1.2
+	* COPYING: CDDL license file.
+
 2008-06-27  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* configure.in: bump to 0.1.1
