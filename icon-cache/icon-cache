@@ -89,6 +89,7 @@ for DIR in /usr/share/icons/*; do
 	  else
 	    echo "Icons newer than the cache found in $DIR.  Updating the cache." 
 	  fi
+	  rm -f $DIR/.icon-theme.cache
 	  /usr/bin/gtk-update-icon-cache $DIR 
 	  if [ $? -ne 0 ]; then
 	    echo "/usr/bin/gtk-update-icon-cache exited with an error while \

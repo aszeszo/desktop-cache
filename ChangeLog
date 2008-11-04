@@ -1,3 +1,7 @@
+2008-11-04 Erwann Chenede - <erwann.chenede@sun.com>
+
+       * icon-cache/icon-cache: fix for 4058
+
 2008-09-17  Ghee Teo <ghee.teo@sun.com>
 
 	Create new tarball with CDDL COPYING file.	
