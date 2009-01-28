@@ -35,28 +35,12 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 <method>"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
     exit 2
 fi
-
-METHOD=$1
-
-case $METHOD in
-    start)
-	# Continue with rest of script
-	;;
-    -*)
-	echo $USAGE
-	exit 2
-	;;
-    *)
-	echo "Invalid method $METHOD"
-	exit 2
-	;;
-esac
 
 #
 # for each icon directory update the icon cache if:
@@ -67,8 +51,8 @@ esac
 #  - if no cache exist but subdirectories (hence icons) are present
 #
 
-IFS=" 
-"
+start_icon_cache ()
+{
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
@@ -101,5 +85,61 @@ generating the icon cache for $DIR."
       fi
      fi
 done
+}
+
+refresh_icon_cache ()
+{
+for DIR in /usr/share/icons/*; do
+     if [ -a "$DIR/index.theme" ] ; then
+      if [ -a "$DIR/icon-theme.cache" ] ; then
+	RESULT=`/usr/bin/find $DIR ! -type d -follow 2>/dev/null`
+      else
+	RESULT=`/usr/bin/find $DIR -type d`
+	if [ ${#RESULT} == ${#DIR} ]; then
+	  echo "$DIR doesn't contain subdirectories.  No icon cache is needed"
+	  RESULT=""
+	else
+	  RESULT="nocache"
+	fi
+      fi
+      if [ -n "$RESULT" ]; then
+	  if [ "$RESULT" == "nocache" ]; then 
+	    echo "No icon cache found in $DIR.  Generating one."
+	  else
+	    echo "Icons newer than the cache found in $DIR.  Updating the cache." 
+	  fi
+	  rm -f $DIR/.icon-theme.cache
+	  /usr/bin/gtk-update-icon-cache $DIR 
+	  if [ $? -ne 0 ]; then
+	    echo "/usr/bin/gtk-update-icon-cache exited with an error while \
+generating the icon cache for $DIR." 
+	    exit $SMF_EXIT_ERR_FATAL
+	  else
+	    echo "Icon cache successfully generated in $DIR"
+	  fi
+      fi
+     fi
+done
+}
+
+METHOD=$1
+
+case $METHOD in
+    start)
+	# Continue with rest of script
+	;;
+    refresh)
+	;;
+    -*)
+	echo $USAGE
+	exit 2
+	;;
+    *)
+	echo "Invalid method $METHOD"
+	exit 2
+	;;
+esac
+
+${METHOD}_icon_cache
 
 exit $SMF_EXIT_OK

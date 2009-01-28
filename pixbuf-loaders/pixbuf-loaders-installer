@@ -35,29 +35,12 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 <method>"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
     exit 2
 fi
-
-METHOD=$1
-
-case "$METHOD" in
-    start)
-	# Continue with rest of script
-	;;
-    -*)
-	echo $USAGE
-	exit 2
-	;;
-    *)
-	echo "Invalid method $METHOD"
-	exit 2
-	;;
-esac
-
 
 #
 # for each architecture 
@@ -69,15 +52,14 @@ esac
 #   if list generate loader list     
 #
 
-IFS=" 
-"
-
 ARCH64=`/bin/isainfo -k`
 
 if [[ $ARCH64 != "amd64" ]] && [[ "$ARCH64" != "sparcv9" ]]; then
   ARCH64=""
 fi
 
+start_pixbuf_loaders_installer ()
+{
 for DIR in "" $ARCH64; do
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
     RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d -follow \
@@ -97,4 +79,50 @@ for DIR in "" $ARCH64; do
     fi
   fi
 done
+}
+
+refresh_pixbuf_loaders_installer ()
+{
+for DIR in "" $ARCH64; do
+  if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
+    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d \
+	   -follow -print 2>/dev/null`
+  else
+    RESULT="no loader file"
+  fi
+
+  if [ -n "$RESULT" ]; then 
+    echo "updating/creating gdk pixbuf loader file"
+    /usr/bin/$DIR/gdk-pixbuf-query-loaders > /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders
+    if [ $? -ne 0 ]; then
+      echo "gdk-pixbuf-query-loaders exited with an error while generating the installer file /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
+      exit $SMF_EXIT_ERR_FATAL
+    else
+      echo "gdk pixbuf loaders installed in /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders"
+    fi
+  fi
+done
+}
+
+METHOD=$1
+
+case "$METHOD" in
+    start)
+	# Continue with rest of script
+	;;
+    refresh)
+	# Continue with rest of script
+	;;
+    -*)
+	echo $USAGE
+	exit 2
+	;;
+    *)
+	echo "Invalid method $METHOD"
+	exit 2
+	;;
+esac
+
+${METHOD}_pixbuf_loaders_installer
+
 exit $SMF_EXIT_OK

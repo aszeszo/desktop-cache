@@ -34,29 +34,12 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 <method>"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
     exit 2
 fi
-
-METHOD=$1
-
-case "$METHOD" in
-    start)
-	# Continue with rest of script
-	;;
-    -*)
-	echo $USAGE
-	exit 2
-	;;
-    *)
-	echo "Invalid method $METHOD"
-	exit 2
-	;;
-esac
-
 
 #
 # IF the mime cache exist then :
@@ -67,8 +50,8 @@ esac
 # generate the cache
 #
 
-IFS=" 
-"
+start_mime_types_cache ()
+{
 if [ -a "/usr/share/mime/mime.cache" ]; then
   RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow \
     -newer /usr/share/mime/mime.cache 2>/dev/null`
@@ -86,4 +69,47 @@ if [ -n "$RESULT" ]; then
     echo "mime type cache /usr/share/mime/mime.cache generated"
   fi
 fi
+}
+
+refresh_mime_types_cache ()
+{
+if [ -a "/usr/share/mime/mime.cache" ]; then
+  RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow 2>/dev/null`
+else
+  RESULT="no cache found"
+fi
+
+if [ -n "$RESULT" ]; then 
+  echo "updating mime type cache" 
+  /usr/bin/update-mime-database /usr/share/mime
+  if [ $? -ne 0 ]; then
+    echo "update-mime-database exited with an error while generating the mime type cache /usr/share/mime/mime.cache"
+    exit $SMF_EXIT_ERR_FATAL
+  else
+    echo "mime type cache /usr/share/mime/mime.cache generated"
+  fi
+fi
+}
+
+METHOD=$1
+
+case "$METHOD" in
+    start)
+	# Continue with rest of script
+	;;
+    refresh)
+	# Continue with rest of script
+	;;
+    -*)
+	echo $USAGE
+	exit 2
+	;;
+    *)
+	echo "Invalid method $METHOD"
+	exit 2
+	;;
+esac
+
+${METHOD}_mime_types_cache
+
 exit $SMF_EXIT_OK

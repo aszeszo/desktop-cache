@@ -35,29 +35,12 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 <method>"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
     exit 2
 fi
-
-METHOD=$1
-
-case $METHOD in
-    start)
-	# Continue with rest of script
-	;;
-    -*)
-	echo $USAGE
-	exit 2
-	;;
-    *)
-	echo "Invalid method $METHOD"
-	exit 2
-	;;
-esac
-
 
 #
 # IF the gconf cache exist then :
@@ -68,8 +51,8 @@ esac
 # generate/merge schema files in the gconf cache
 #
 
-IFS=" 
-"
+start_gconf_cache ()
+{
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
   SCHEMAS=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
     -name '*.schemas' \
@@ -112,3 +95,70 @@ if [ -n "$ENTRIES" ]; then
     echo "Entries merged into the GConf cache"
   fi
 fi
+}
+
+refresh_gconf_cache ()
+{
+if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
+  SCHEMAS=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
+    -name '*.schemas' 2>/dev/null`
+  ENTRIES=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
+    -name '*.entries' 2>/dev/null`
+else
+  SCHEMAS=`/usr/bin/find /etc/gconf/schemas -name '*.schemas' ! -type d`
+  ENTRIES=`/usr/bin/find /etc/gconf/schemas -name '*.entries' ! -type d`
+fi
+
+if [ -n "$SCHEMAS" ]; then 
+  echo "Updating GConf cache for the following schemas:"
+  echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
+  # redirect stdout to /dev/null because gconftool is too verbose
+  # errors are printed to stderr
+  GCONF_CONFIG_SOURCE=xml:merged:/etc/gconf/gconf.xml.defaults \
+    /usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "gconftool-2 exited with an error while installing schemas"
+    exit $SMF_EXIT_ERR_FATAL
+  else
+    echo "Schema files merged in the GConf cache"
+  fi
+fi
+
+if [ -n "$ENTRIES" ]; then 
+  echo "Updating GConf cache for the following entries:"
+  echo "$ENTRIES" | /bin/sed -e 's/^/    /'
+  # redirect stdout to /dev/null because gconftool is too verbose
+  # errors are printed to stderr
+  /usr/bin/gconftool-2 --direct \
+      --config-source=xml:merged:/etc/gconf/gconf.xml.defaults \
+      --load $ENTRIES > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "gconftool-2 exited with an error while adding entries"
+    exit $SMF_EXIT_ERR_FATAL
+  else
+    echo "Entries merged into the GConf cache"
+  fi
+fi
+}
+
+METHOD=$1
+
+case "$METHOD" in
+    'start')
+	# Continue with rest of script
+	;;
+    'refresh')
+	;;
+    -*)
+	echo $USAGE
+	exit 2
+	;;
+    *)
+	echo "Invalid method $METHOD"
+	exit 2
+	;;
+esac
+
+${METHOD}_gconf_cache
+
+exit $SMF_EXIT_OK
