@@ -1,3 +1,7 @@
+2008-11-07 Erwann Chenede - <erwann.chenede@sun.com>
+      
+       * configure.in: bump to 0.1.3
+
 2008-11-04 Erwann Chenede - <erwann.chenede@sun.com>
 
        * icon-cache/icon-cache: fix for 4058
