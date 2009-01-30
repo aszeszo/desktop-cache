@@ -1,5 +1,18 @@
 2009-01-28  Ghee Teo  <ghee.teo@sun.com>
 
+	More changes required to fix 2399.
+	Changed refresh option to restart instead to fit into SMF philosophy.
+	bumped version to 0.1.5
+	* configure.in:
+	* desktop-mime-cache/desktop-mime-cache.xml:
+	* gconf-cache/gconf-cache.xml:
+	* icon-cache/icon-cache.xml:
+	* input-method/input-method-cache.xml:
+	* mime-types-cache/mime-types-cache.xml:
+	* pixbuf-loaders/pixbuf-loaders-installer.xml:
+
+2009-01-28  Ghee Teo  <ghee.teo@sun.com>
+
 	Fixes d.o.o 2399 by adding in refresh option.
 	bump version to 0.1.4
 	* configure.in:

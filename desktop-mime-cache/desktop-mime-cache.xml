@@ -73,6 +73,16 @@
 
 	<exec_method
 		type='method'
+		name='restart'
+		exec='/lib/svc/method/desktop-mime-cache %m'
+		timeout_seconds='600'>
+		<method_context>
+                        <method_credential user='root' group='root' />
+                </method_context>
+        </exec_method>
+
+	<exec_method
+		type='method'
 		name='stop'
 		exec=':true'
 		timeout_seconds='60' />
