@@ -35,7 +35,7 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 { start | restart }"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -87,11 +87,12 @@ generating the icon cache for $DIR."
 done
 }
 
-restart_icon_cache ()
+refresh_icon_cache ()
 {
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
+	rm -f $DIR/icon-theme.cache
 	RESULT=`/usr/bin/find $DIR ! -type d -follow 2>/dev/null`
       else
 	RESULT=`/usr/bin/find $DIR -type d`
@@ -125,10 +126,10 @@ done
 METHOD=$1
 
 case $METHOD in
-    start)
+    'start')
 	# Continue with rest of script
 	;;
-    restart)
+    'refresh')
 	;;
     -*)
 	echo $USAGE

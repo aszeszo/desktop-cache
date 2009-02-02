@@ -73,7 +73,7 @@
 
 	<exec_method
 		type='method'
-		name='restart'
+		name='refresh'
 		exec='/lib/svc/method/input-method-cache %m'
 		timeout_seconds='600'>
 		<method_context>

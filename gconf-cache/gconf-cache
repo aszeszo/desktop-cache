@@ -35,7 +35,7 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 { start | restart }"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -97,7 +97,7 @@ if [ -n "$ENTRIES" ]; then
 fi
 }
 
-restart_gconf_cache ()
+refresh_gconf_cache ()
 {
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
   SCHEMAS=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
@@ -147,7 +147,7 @@ case "$METHOD" in
     'start')
 	# Continue with rest of script
 	;;
-    'restart')
+    'refresh')
 	;;
     -*)
 	echo $USAGE

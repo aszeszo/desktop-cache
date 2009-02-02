@@ -34,7 +34,7 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 { start | restart }"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -71,7 +71,7 @@ if [ -n "$RESULT" ]; then
 fi
 }
 
-restart_mime_types_cache ()
+refresh_mime_types_cache ()
 {
 if [ -a "/usr/share/mime/mime.cache" ]; then
   RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow 2>/dev/null`
@@ -94,10 +94,10 @@ fi
 METHOD=$1
 
 case "$METHOD" in
-    start)
+    'start')
 	# Continue with rest of script
 	;;
-    restart)
+    'refresh')
 	# Continue with rest of script
 	;;
     -*)

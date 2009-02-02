@@ -34,7 +34,7 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 { start | restart }"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -72,7 +72,7 @@ if [ -n "$RESULT" ]; then
 fi
 }
 
-restart_desktop_mime_cache () {
+refresh_desktop_mime_cache () {
 if [ -a $MIMEFILE ]; then
   RESULT=`/usr/bin/find /usr/share/applications ! -type d -follow 2>/dev/null`
 else
@@ -97,7 +97,7 @@ case "$METHOD" in
     'start')
 	# Continue with rest of script
 	;;
-    'restart')
+    'refresh')
 	;;
     -*)
 	echo $USAGE

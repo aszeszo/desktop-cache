@@ -1,3 +1,22 @@
+2009-02-02  Ghee Teo  <set EMAIL_ADDRESS environment variable>
+
+	Uprev to 0.1.6. Now provide 'refresh' method properly and this is the
+	one to use as svcadm restart <fmri> boiled down to a 'stop' and 'start'
+	calls for these services and is not what is required.
+	* configure.in:
+	* desktop-mime-cache/desktop-mime-cache:
+	* desktop-mime-cache/desktop-mime-cache.xml:
+	* gconf-cache/gconf-cache:
+	* gconf-cache/gconf-cache.xml:
+	* icon-cache/icon-cache:
+	* icon-cache/icon-cache.xml:
+	* input-method/input-method-cache:
+	* input-method/input-method-cache.xml:
+	* mime-types-cache/mime-types-cache:
+	* mime-types-cache/mime-types-cache.xml:
+	* pixbuf-loaders/pixbuf-loaders-installer:
+	* pixbuf-loaders/pixbuf-loaders-installer.xml:
+
 2009-01-28  Ghee Teo  <ghee.teo@sun.com>
 
 	More changes required to fix 2399.

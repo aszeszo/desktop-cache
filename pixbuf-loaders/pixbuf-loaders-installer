@@ -35,7 +35,7 @@ PATH=/usr/bin:/usr/sbin
 
 . /lib/svc/share/smf_include.sh
 
-USAGE="Usage: $0 { start | restart }"
+USAGE="Usage: $0 { start | refresh }"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -81,7 +81,7 @@ for DIR in "" $ARCH64; do
 done
 }
 
-restart_pixbuf_loaders_installer ()
+refresh_pixbuf_loaders_installer ()
 {
 for DIR in "" $ARCH64; do
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
@@ -107,10 +107,10 @@ done
 METHOD=$1
 
 case "$METHOD" in
-    start)
+    'start')
 	# Continue with rest of script
 	;;
-    restart)
+    'refresh')
 	# Continue with rest of script
 	;;
     -*)
