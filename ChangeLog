@@ -1,4 +1,4 @@
-2009-02-02  Ghee Teo  <set EMAIL_ADDRESS environment variable>
+2009-02-02  Ghee Teo  <ghee.teo@sun.com>
 
 	Uprev to 0.1.6. Now provide 'refresh' method properly and this is the
 	one to use as svcadm restart <fmri> boiled down to a 'stop' and 'start'
