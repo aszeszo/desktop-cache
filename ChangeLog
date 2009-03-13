@@ -1,4 +1,8 @@
 2009-03-13 Erwann Chenede - <erwann.chenede@sun.com>
+    
+	* */*.xml : integrated stability value patch
+
+2009-03-13 Erwann Chenede - <erwann.chenede@sun.com>
 
 	fix for 6617
 

@@ -91,7 +91,7 @@
 			value='transient' />
 	</property_group>
 
-	<stability value='Uncommitted' />
+	<stability value='Evolving' />
 
 	<template>
 		<common_name>
