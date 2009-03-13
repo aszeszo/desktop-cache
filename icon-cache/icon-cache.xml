@@ -51,7 +51,15 @@
 		restart_on='none'>
 		<service_fmri value='svc:/system/filesystem/local' />
 	</dependency>
-
+	
+	<!-- Need pixbuf-loaders installed before running -->
+	<dependency
+		name='pixbuf-loaders'
+		type='service'
+		grouping='require_all'
+		restart_on='none'>
+		<service_fmri value='svc:/application/desktop-cache/pixbuf-loaders-installer' />
+	</dependency>
 	<!-- Need to be run before gdm is started -->
 	<dependent
          name='icon-cache_gdm'

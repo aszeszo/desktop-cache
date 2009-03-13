@@ -1,3 +1,12 @@
+2009-03-13 Erwann Chenede - <erwann.chenede@sun.com>
+
+	fix for 6617
+
+	* icon-cache/icon-cache.xml : added dependency on pixbuf-loaders
+	* icon-cache/icon-cache : don't stop the service as failue isn't
+	  fatal only an error in the log should be reported.
+	* configure.in : bump version to 0.1.7
+
 2009-02-02  Ghee Teo  <ghee.teo@sun.com>
 
 	Uprev to 0.1.6. Now provide 'refresh' method properly and this is the
