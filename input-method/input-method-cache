@@ -36,6 +36,7 @@ PATH=/usr/bin:/usr/sbin
 . /lib/svc/share/smf_include.sh
 
 USAGE="Usage: $0 { start | refresh }"
+FIND_NEWER=/usr/share/desktop-cache/find_newer
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -63,8 +64,9 @@ start_input_method_cache ()
 {
 for DIR in "" $ARCH64; do
   if [ -a "/etc/$DIR/gtk-2.0/gtk.immodules" ]; then
-    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/immodules/*.so ! -type d -follow \
-      -newer /etc/$DIR/gtk-2.0/gtk.immodules 2>/dev/null`
+    RESULT=`${FIND_NEWER} -c -f -m --name '*.so' \
+	--newer /etc/$DIR/gtk-2.0/gtk.immodules \
+	/usr/lib/$DIR/gtk-2.0/*/immodules 2>/dev/null`
   else
     RESULT="no cache file"
   fi

@@ -36,6 +36,7 @@ PATH=/usr/bin:/usr/sbin
 . /lib/svc/share/smf_include.sh
 
 USAGE="Usage: $0 { start | refresh }"
+FIND_NEWER=/usr/share/desktop-cache/find_newer
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -54,12 +55,12 @@ fi
 start_gconf_cache ()
 {
 if [ -a "/etc/gconf/gconf.xml.defaults/%gconf-tree.xml" ]; then
-  SCHEMAS=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
-    -name '*.schemas' \
-    -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml 2>/dev/null`
-  ENTRIES=`/usr/bin/find /etc/gconf/schemas ! -type d -follow \
-    -name '*.entries' \
-    -newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml 2>/dev/null`
+  SCHEMAS=`${FIND_NEWER} -f -m -c --name '*.schemas' \
+      --newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml \
+      /etc/gconf/schemas 2>/dev/null`
+  ENTRIES=`${FIND_NEWER} -f -m -c --name '*.entries' \
+      --newer /etc/gconf/gconf.xml.defaults/%gconf-tree.xml \
+      /etc/gconf/schemas 2>/dev/null`
 else
   SCHEMAS=`/usr/bin/find /etc/gconf/schemas -name '*.schemas' ! -type d`
   ENTRIES=`/usr/bin/find /etc/gconf/schemas -name '*.entries' ! -type d`

@@ -35,6 +35,7 @@ PATH=/usr/bin:/usr/sbin
 . /lib/svc/share/smf_include.sh
 
 USAGE="Usage: $0 { start | refresh }"
+FIND_NEWER=/usr/share/desktop-cache/find_newer
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -54,8 +55,9 @@ MIMEFILE="/usr/share/applications/mimeinfo.cache"
 
 start_desktop_mime_cache () {
 if [ -a $MIMEFILE ]; then
-  RESULT=`/usr/bin/find /usr/share/applications ! -type d -follow \
-    -newer $MIMEFILE 2>/dev/null`
+  RESULT=`${FIND_NEWER} -f -c -m \
+      --newer $MIMEFILE \
+      /usr/share/applications 2>/dev/null`
 else
   RESULT="no cache found"
 fi

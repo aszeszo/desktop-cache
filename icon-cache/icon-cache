@@ -36,6 +36,7 @@ PATH=/usr/bin:/usr/sbin
 . /lib/svc/share/smf_include.sh
 
 USAGE="Usage: $0 { start | refresh }"
+FIND_NEWER=/usr/share/desktop-cache/find_newer
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -56,8 +57,7 @@ start_icon_cache ()
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
-	RESULT=`/usr/bin/find $DIR ! -type d -follow \
-	-newer $DIR/icon-theme.cache 2>/dev/null`
+	RESULT=`${FIND_NEWER} -f -m -c --newer $DIR/icon-theme.cache $DIR 2>/dev/null`
       else
 	RESULT=`/usr/bin/find $DIR -type d`
 	if [ ${#RESULT} == ${#DIR} ]; then

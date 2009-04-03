@@ -36,6 +36,7 @@ PATH=/usr/bin:/usr/sbin
 . /lib/svc/share/smf_include.sh
 
 USAGE="Usage: $0 { start | refresh }"
+FIND_NEWER=/usr/share/desktop-cache/find_newer
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
@@ -62,8 +63,9 @@ start_pixbuf_loaders_installer ()
 {
 for DIR in "" $ARCH64; do
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
-    RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d -follow \
-      -newer /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders -print 2>/dev/null`
+    RESULT=`${FIND_NEWER} -f -c -m --name '*.so' \
+	--newer /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders \
+	/usr/lib/$DIR/gtk-2.0/*/loaders 2>/dev/null`
   else
     RESULT="no loader file"
   fi

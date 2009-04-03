@@ -1,3 +1,17 @@
+2009-04-02  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* Makefile.am: add find_newer and restart_fmri
+	* configure.in: bump to 0.2.0
+	* desktop-mime-cache/desktop-mime-cache: use find_newer
+	* find_newer: (new) script for finding files based on various
+	  filesystem stat times and names
+	* gconf-cache/gconf-cache: use find_newer
+	* icon-cache/icon-cache: use find_newer
+	* input-method/input-method-cache: use find_newer
+	* mime-types-cache/mime-types-cache: use find_newer
+	* pixbuf-loaders/pixbuf-loaders-installer: use find_newer
+	* restart_fmri: (new) script for starting/restarting smf services
+
 2009-03-13 Erwann Chenede - <erwann.chenede@sun.com>
     
 	* */*.xml : integrated stability value patch
