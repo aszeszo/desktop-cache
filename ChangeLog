@@ -1,3 +1,12 @@
+2009-04-29  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* configure.in: bump to 0.2.1
+	* desktop-mime-cache/desktop-mime-cache, gconf-cache/gconf-cache,
+	  icon-cache/icon-cache, input-method/input-method-cache,
+	  mime-types-cache/mime-types-cache,
+	  pixbuf-loaders/pixbuf-loaders-installer: check if the corresponding
+	  executables exist before trying to call them.
+
 2009-04-02  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* Makefile.am: add find_newer and restart_fmri

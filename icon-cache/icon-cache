@@ -54,6 +54,10 @@ fi
 
 start_icon_cache ()
 {
+test -x /usr/bin/gtk-update-icon-cache || {
+    echo "gtk-update-icon-cache not installed"
+    return
+}
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then
@@ -88,6 +92,10 @@ done
 
 refresh_icon_cache ()
 {
+test -x /usr/bin/gtk-update-icon-cache || {
+    echo "gtk-update-icon-cache not installed"
+    return
+}
 for DIR in /usr/share/icons/*; do
      if [ -a "$DIR/index.theme" ] ; then
       if [ -a "$DIR/icon-theme.cache" ] ; then

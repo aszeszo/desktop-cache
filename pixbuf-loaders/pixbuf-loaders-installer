@@ -62,6 +62,10 @@ fi
 start_pixbuf_loaders_installer ()
 {
 for DIR in "" $ARCH64; do
+  test -x /usr/bin/$DIR/gdk-pixbuf-query-loaders || {
+      echo "gdk-pixbuf-query-loaders not installed"
+      continue
+  }
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
     RESULT=`${FIND_NEWER} -f -c -m --name '*.so' \
 	--newer /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders \
@@ -86,6 +90,10 @@ done
 refresh_pixbuf_loaders_installer ()
 {
 for DIR in "" $ARCH64; do
+  test -x /usr/bin/$DIR/gdk-pixbuf-query-loaders || {
+      echo "gdk-pixbuf-query-loaders not installed"
+      continue
+  }
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
     RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d \
 	   -follow -print 2>/dev/null`

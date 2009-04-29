@@ -67,6 +67,10 @@ else
 fi
 
 if [ -n "$SCHEMAS" ]; then 
+  test -x /usr/bin/gconftool-2 || {
+    echo "gconftool-2 not installed"
+    return
+  }
   echo "Updating GConf cache for the following schemas:"
   echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
@@ -82,6 +86,10 @@ if [ -n "$SCHEMAS" ]; then
 fi
 
 if [ -n "$ENTRIES" ]; then 
+  test -x /usr/bin/gconftool-2 || {
+    echo "gconftool-2 not installed"
+    return
+  }
   echo "Updating GConf cache for the following entries:"
   echo "$ENTRIES" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
@@ -111,6 +119,10 @@ else
 fi
 
 if [ -n "$SCHEMAS" ]; then 
+  test -x /usr/bin/gconftool-2 || {
+    echo "gconftool-2 not installed"
+    return
+  }
   echo "Updating GConf cache for the following schemas:"
   echo "$SCHEMAS" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
@@ -126,6 +138,10 @@ if [ -n "$SCHEMAS" ]; then
 fi
 
 if [ -n "$ENTRIES" ]; then 
+  test -x /usr/bin/gconftool-2 || {
+    echo "gconftool-2 not installed"
+    return
+  }
   echo "Updating GConf cache for the following entries:"
   echo "$ENTRIES" | /bin/sed -e 's/^/    /'
   # redirect stdout to /dev/null because gconftool is too verbose
