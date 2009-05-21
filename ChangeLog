@@ -1,3 +1,9 @@
+2009-05-21  Laszlo (Laca) Peter  <laca@sun.com>
+
+	* configure.in: bump to 0.2.2
+	* restart_fmri: handle the case of offline services that are about
+	  to go online (start method is still running)
+
 2009-04-29  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* configure.in: bump to 0.2.1

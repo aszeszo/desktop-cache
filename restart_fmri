@@ -32,6 +32,7 @@ usage() {
 check_svc() {
     svc_fmri=unknown
     svc_state=unknown
+    svc_next_state=unknown
     cmd_out="$(LC_ALL=C /usr/bin/svcs -l "$1" 2>&1)"
     if [ $? != 0 ]; then
 	svc_exists=0
@@ -40,6 +41,7 @@ check_svc() {
     svc_exists=1
     svc_fmri=$(echo "$cmd_out" | /bin/grep "^fmri " | /bin/awk '{ print $2 }')
     svc_state=$(echo "$cmd_out" | /bin/grep "^state " | /bin/awk '{ print $2 }')
+    svc_next_state=$(echo "$cmd_out" | /bin/grep "^next_state " | /bin/awk '{ print $2 }')
 }
 
 test_mode=0
@@ -69,6 +71,9 @@ for arg in "${@}"; do
 
     if [ "$svc_state" == "online" ]; then
 	svcs_to_restart="$svcs_to_restart $svc_fmri"
+    elif [ "$svc_state" == "offline" -a "$svc_next_state" == "online" ]; then
+        # the service is still running its start method
+        svcs_to_restart="$svcs_to_restart $svc_fmri"
     elif [ "$svc_state" == "disabled" ]; then
 	svcs_to_enable="$svcs_to_enable $svc_fmri"
     elif [ "$svc_state" == "maintenance" ]; then
