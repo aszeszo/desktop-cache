@@ -1,3 +1,17 @@
+2011-02-02  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
+
+	* COPYING: Oraclify
+	* configure.in: version bump
+	* find_newer: use python 2.6
+	* desktop-mime-cache/desktop-mime-cache.xml,
+	  gconf-cache/gconf-cache.xml, icon-cache/icon-cache.xml,
+	  input-method/input-method-cache.xml,
+	  mime-types-cache/mime-types-cache.xml,
+	  pixbuf-loaders/pixbuf-loaders-installer.xml: depend on
+	  filesystem/minimal instead of filesystem/local.  Apparently
+	  minimal > local.  Otherwise it is possible that the services are
+	  started before the files they use are available.
+
 2009-05-21  Laszlo (Laca) Peter  <laca@sun.com>
 
 	* configure.in: bump to 0.2.2

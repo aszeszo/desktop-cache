@@ -45,11 +45,11 @@
 
 	<!-- Need / & /usr filesystems mounted, /var mounted read/write -->
 	<dependency
-		name='fs-local'
+		name='usr'
 		type='service'
 		grouping='require_all'
 		restart_on='none'>
-		<service_fmri value='svc:/system/filesystem/local' />
+		<service_fmri value='svc:/system/filesystem/minimal' />
 	</dependency>
 
 	<!-- Need to be run before gdm is started -->
