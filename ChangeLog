@@ -1,3 +1,14 @@
+2011-06-24 Erwann Chenede - <erwann.chenede@oracle.com>
+
+	* pixbuf-loaders/pixbuf-loaders-installer.xml
+	* icon-cache/icon-cache.xml
+	* mime-types-cache/mime-types-cache.xml
+	* gconf-cache/gconf-cache.xml
+	* desktop-mime-cache/desktop-mime-cache.xml
+	* input-method/input-method-cache.xml:
+	  added dependent close to work in ROZR setup (Read Only Zone)
+	* configure.in: bump to 0.2.4
+
 2011-02-02  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
 
 	* COPYING: Oraclify

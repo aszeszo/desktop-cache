@@ -43,6 +43,13 @@
 
 	<single_instance />
 
+	<dependent
+                name='mime_types_cache-assembly-complete'
+                grouping='optional_all'
+                restart_on='none'>
+                <service_fmri value='svc:/milestone/self-assembly-complete' />
+        </dependent>
+
 	<!-- Need / & /usr filesystems mounted, /var mounted read/write -->
 	<dependency
 		name='usr'

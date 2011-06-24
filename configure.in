@@ -1,4 +1,4 @@
-AC_INIT([desktop-cache-smf-services], [0.2.3])
+AC_INIT([desktop-cache-smf-services], [0.2.4])
 AM_INIT_AUTOMAKE
 AM_INIT_AUTOMAKE([1.9])
 
