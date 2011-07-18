@@ -1,5 +1,9 @@
 2011-07-18  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
 
+	* configure.in: version 0.2.5
+
+2011-07-18  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
+
 	* desktop-mime-cache/desktop-mime-cache.xml,
 	  gconf-cache/gconf-cache.xml, icon-cache/icon-cache.xml,
 	  input-method/input-method-cache.xml,
