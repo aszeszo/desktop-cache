@@ -43,13 +43,6 @@
 
 	<single_instance />
 
-        <dependent
-                name='icon_cache-assembly-complete'
-                grouping='optional_all'
-                restart_on='none'>
-                <service_fmri value='svc:/milestone/self-assembly-complete' />
-        </dependent>
-
 
 	<!-- Need / & /usr filesystems mounted, /var mounted read/write -->
 	<dependency
@@ -59,7 +52,7 @@
 		restart_on='none'>
 		<service_fmri value='svc:/system/filesystem/minimal' />
 	</dependency>
-	
+
 	<!-- Need pixbuf-loaders installed before running -->
 	<dependency
 		name='pixbuf-loaders'
@@ -68,6 +61,14 @@
 		restart_on='none'>
 		<service_fmri value='svc:/application/desktop-cache/pixbuf-loaders-installer' />
 	</dependency>
+
+        <dependent
+                name='icon_cache-assembly-complete'
+                grouping='optional_all'
+                restart_on='none'>
+                <service_fmri value='svc:/milestone/self-assembly-complete' />
+        </dependent>
+
 	<!-- Need to be run before gdm is started -->
 	<dependent
          name='icon-cache_gdm'

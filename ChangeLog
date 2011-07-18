@@ -1,3 +1,12 @@
+2011-07-18  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
+
+	* desktop-mime-cache/desktop-mime-cache.xml,
+	  gconf-cache/gconf-cache.xml, icon-cache/icon-cache.xml,
+	  input-method/input-method-cache.xml,
+	  mime-types-cache/mime-types-cache.xml,
+	  pixbuf-loaders/pixbuf-loaders-installer.xml: move "dependent"
+	  element to after "dependency" elements, fixes 7068018
+
 2011-06-24 Erwann Chenede - <erwann.chenede@oracle.com>
 
 	* pixbuf-loaders/pixbuf-loaders-installer.xml

@@ -44,13 +44,6 @@
 
 	<single_instance />
 
-	<dependent
-                name='input_method_cache-assembly-complete'
-                grouping='optional_all'
-                restart_on='none'>
-                <service_fmri value='svc:/milestone/self-assembly-complete' />
-        </dependent>
-
 	<!-- Need / & /usr filesystems mounted, /var mounted read/write -->
 	<dependency
 		name='usr'
@@ -59,6 +52,13 @@
 		restart_on='none'>
 		<service_fmri value='svc:/system/filesystem/minimal' />
 	</dependency>
+
+	<dependent
+                name='input_method_cache-assembly-complete'
+                grouping='optional_all'
+                restart_on='none'>
+                <service_fmri value='svc:/milestone/self-assembly-complete' />
+        </dependent>
 
 	<!-- Need to be run before gdm is started -->
 	<dependent
