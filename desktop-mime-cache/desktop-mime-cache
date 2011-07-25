@@ -68,7 +68,7 @@ if [ -n "$RESULT" ]; then
     return
   }
   echo "updating desktop file cache" 
-  /usr/bin/update-desktop-database
+  /usr/bin/update-desktop-database -q
   if [ $? -ne 0 ]; then
     echo "update-mime-database exited with an error while generating the desktop file cache $MIMEFILE"
     exit $SMF_EXIT_ERR_FATAL
@@ -91,7 +91,7 @@ if [ -n "$RESULT" ]; then
     return
   }
   echo "updating desktop file cache" 
-  /usr/bin/update-desktop-database
+  /usr/bin/update-desktop-database -q
   if [ $? -ne 0 ]; then
     echo "update-mime-database exited with an error while generating the desktop file cache $MIMEFILE"
     exit $SMF_EXIT_ERR_FATAL

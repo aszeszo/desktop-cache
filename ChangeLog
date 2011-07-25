@@ -1,3 +1,11 @@
+2011-07-25  Brian Cameron - <brian.cameron@oracle.com>
+
+	* configure.in: version 0.2.6
+	* desktop-mime-cache/desktop-mime-cache: Add the -q (quiet)
+	  argument to calls to update-desktop-database so that warning
+	  messages do not get placed into the SMF logs.   Fixes CR
+	  #7065973.
+
 2011-07-18  Laszlo (Laca) Peter  <laszlo.peter@oracle.com>
 
 	* configure.in: version 0.2.5
