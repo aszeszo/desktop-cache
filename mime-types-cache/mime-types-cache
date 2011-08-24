@@ -50,9 +50,14 @@ fi
 #
 # generate the cache
 #
+MIMEDIR="/usr/share/mime"
 
 start_mime_types_cache ()
 {
+test -w $MIMEDIR || { 
+  echo "$MIMEDIR is not writable, skipping."
+  return
+}
 if [ -a "/usr/share/mime/mime.cache" ]; then
   RESULT=`${FIND_NEWER} -f -c -m \
       --newer /usr/share/mime/mime.cache \
@@ -79,6 +84,10 @@ fi
 
 refresh_mime_types_cache ()
 {
+test -w $MIMEDIR || { 
+  echo "$MIMEDIR is not writable, skipping."
+  return
+}
 if [ -a "/usr/share/mime/mime.cache" ]; then
   RESULT=`/usr/bin/find /usr/share/mime/packages ! -type d -follow 2>/dev/null`
 else

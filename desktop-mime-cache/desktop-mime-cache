@@ -52,8 +52,15 @@ fi
 #
 
 MIMEFILE="/usr/share/applications/mimeinfo.cache"
+MIMEDIR="/usr/share/applications"
 
 start_desktop_mime_cache () {
+
+test -w $MIMEDIR || { 
+  echo "$MIMEDIR is not writable, skipping."
+  return
+}
+
 if [ -a $MIMEFILE ]; then
   RESULT=`${FIND_NEWER} -f -c -m \
       --newer $MIMEFILE \
@@ -79,6 +86,12 @@ fi
 }
 
 refresh_desktop_mime_cache () {
+
+test -w $MIMEDIR || { 
+  echo "$MIMEDIR is not writable, skipping."
+  return
+}
+
 if [ -a $MIMEFILE ]; then
   RESULT=`/usr/bin/find /usr/share/applications ! -type d -follow 2>/dev/null`
 else

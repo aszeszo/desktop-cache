@@ -66,6 +66,10 @@ for DIR in "" $ARCH64; do
       echo "gdk-pixbuf-query-loaders not installed"
       continue
   }
+  test -w /etc/$DIR/gtk-2.0 || {
+      echo "/etc/$DIR/gtk-2.0 is not writable, skipping."
+      return
+  }
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
     RESULT=`${FIND_NEWER} -f -c -m --name '*.so' \
 	--newer /etc/$DIR/gtk-2.0/gdk-pixbuf.loaders \
@@ -93,6 +97,10 @@ for DIR in "" $ARCH64; do
   test -x /usr/bin/$DIR/gdk-pixbuf-query-loaders || {
       echo "gdk-pixbuf-query-loaders not installed"
       continue
+  }
+  test -w /etc/$DIR/gtk-2.0 || {
+      echo "/etc/$DIR/gtk-2.0 is not writable, skipping."
+      return
   }
   if [ -a "/etc/$DIR/gtk-2.0/gdk-pixbuf.loaders" ]; then
     RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/loaders/*.so ! -type d \

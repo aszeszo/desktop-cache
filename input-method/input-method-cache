@@ -67,6 +67,10 @@ for DIR in "" $ARCH64; do
       echo "gtk-query-immodules-2.0 not installed"
       continue
   }
+  test -w /etc/$DIR/gtk-2.0 || {
+      echo "/etc/$DIR/gtk-2.0 is not writable, skipping."
+      return
+  }
   if [ -a "/etc/$DIR/gtk-2.0/gtk.immodules" ]; then
     RESULT=`${FIND_NEWER} -c -f -m --name '*.so' \
 	--newer /etc/$DIR/gtk-2.0/gtk.immodules \
@@ -95,6 +99,10 @@ for DIR in "" $ARCH64; do
   test -x /usr/bin/$DIR/gtk-query-immodules-2.0 || {
       echo "gtk-query-immodules-2.0 not installed"
       continue
+  }
+  test -w /etc/$DIR/gtk-2.0 || {
+      echo "/etc/$DIR/gtk-2.0 is not writable, skipping."
+      return
   }
   if [ -a "/etc/$DIR/gtk-2.0/gtk.immodules" ]; then
     RESULT=`/usr/bin/find /usr/lib/$DIR/gtk-2.0/*/immodules/*.so ! -type d \
